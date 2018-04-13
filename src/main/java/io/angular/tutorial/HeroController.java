@@ -1,23 +1,53 @@
 package io.angular.tutorial;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/heroes")
 public class HeroController {
-    List heroes = new ArrayList();
+    List<Hero> heroes = new ArrayList<>();
 
     @GetMapping
     public List<Hero> getAll(){
         return heroes;
     }
 
+    @GetMapping("/{id}")
+    public Hero getById(@PathVariable long id){
+        return heroes.stream()
+                .filter(hero -> id == hero.getId())
+                .findFirst().orElse(null);
+    }
+
+    @PutMapping()
+    public Hero updateHero(@RequestBody Hero hero){
+        if(hero.getId() == null)
+            return createHero(hero);
+        heroes.stream()
+                .filter(cHero -> cHero.getId() == hero.getId())
+                .findFirst()
+                .ifPresent(hero1 -> hero1.setName(hero.getName()));
+        return hero;
+    }
+
+    @PostMapping
+    public Hero createHero(@RequestBody Hero hero){
+        long id = heroes.stream().mapToLong(Hero::getId).max().orElse(0)+1;
+        Hero createdHero = new Hero(id,hero.getName());
+        heroes.add(createdHero);
+        return createdHero;
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteHero(@PathVariable long id){
+        heroes = heroes.stream().filter(hero -> id!=hero.getId()).collect(Collectors.toList());
+    }
 
 
 

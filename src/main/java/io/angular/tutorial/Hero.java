@@ -1,16 +1,18 @@
 package io.angular.tutorial;
 
+import java.util.Objects;
+
 public class Hero {
 
-    private long id;
+    private Long id;
     private String name;
-
+    public Hero(){}
     public Hero(long id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -26,4 +28,19 @@ public class Hero {
         this.name = name;
     }
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Hero hero = (Hero) o;
+        return id == hero.id &&
+                Objects.equals(name, hero.name);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(id, name);
+    }
 }
