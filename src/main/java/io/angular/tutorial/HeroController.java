@@ -14,9 +14,13 @@ public class HeroController {
     List<Hero> heroes = new ArrayList<>();
 
     @GetMapping
-    public List<Hero> getAll(){
-        return heroes;
+    public List<Hero> get(@RequestParam(defaultValue = "") String name){
+        if(name.equals(""))
+            return heroes;
+        return heroes.stream().filter(hero -> hero.getName().contains(name)).collect(Collectors.toList());
     }
+
+
 
     @GetMapping("/{id}")
     public Hero getById(@PathVariable long id){
