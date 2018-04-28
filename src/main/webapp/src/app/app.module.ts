@@ -13,6 +13,7 @@ import { AppRoutingModule } from './/app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import {HttpClientModule} from '@angular/common/http';
 import {HeroSearchComponent} from './hero-search/hero-search.component';
+import {PageNotFoundComponent} from './PageNotFoundComponent';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import {HeroSearchComponent} from './hero-search/hero-search.component';
     HeroDetailComponent,
     MessagesComponent,
     DashboardComponent,
-    HeroSearchComponent
+    HeroSearchComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
