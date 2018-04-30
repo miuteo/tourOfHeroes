@@ -1,8 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Hero} from '../Hero';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {HeroService} from '../hero.service';
 import { Location } from '@angular/common';
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/operator/switchMap';
 
 @Component({
   selector: 'app-hero-detail',
@@ -11,8 +13,9 @@ import { Location } from '@angular/common';
 })
 export class HeroDetailComponent implements OnInit {
   // @Input()
-  hero: Hero;
+  hero$: Observable<Hero>;
   constructor(  private route: ActivatedRoute,
+                private router: Router,
                 private heroService: HeroService,
                 private location: Location) { }
 
@@ -21,16 +24,19 @@ export class HeroDetailComponent implements OnInit {
   }
 
   getHero(): void{
-      const id = +this.route.snapshot.paramMap.get('id');
-      this.heroService.getHero(id)
-        .subscribe(hero => this.hero = hero);
+      // const id = +this.route.snapshot.paramMap.get('id');
+      // this.heroService.getHero(id)
+      //   .subscribe(hero => this.hero = hero);
+    this.hero$ = this.route.paramMap
+      .switchMap((params: ParamMap)=>
+          this.heroService.getHero(params.get('id')));
   }
   goBack(): void {
     this.location.back();
   }
 
-  save(): void {
-    this.heroService.updateHero(this.hero)
+  save(hero: Hero): void {
+    this.heroService.updateHero(hero)
       .subscribe( );
   }
 

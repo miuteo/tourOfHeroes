@@ -14,6 +14,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import {HttpClientModule} from '@angular/common/http';
 import {HeroSearchComponent} from './hero-search/hero-search.component';
 import {PageNotFoundComponent} from './PageNotFoundComponent';
+import {HeroesModule} from 'app/heroes/heroes.module';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import {PageNotFoundComponent} from './PageNotFoundComponent';
   imports: [
     BrowserModule,
     FormsModule,
+    HeroesModule,
     AppRoutingModule,
     HttpClientModule
   ],
