@@ -15,6 +15,9 @@ import {HttpClientModule} from '@angular/common/http';
 import {HeroSearchComponent} from './hero-search/hero-search.component';
 import {PageNotFoundComponent} from './PageNotFoundComponent';
 import {HeroesModule} from 'app/heroes/heroes.module';
+import {CrisisCenterModule} from './crisis-center/crisis-center.module';
+import {ComposeMessageComponent} from './compose-mesage.component';
+import {NavbarComponent} from './layouts/navbar/navbar.component';
 
 
 @NgModule({
@@ -25,12 +28,15 @@ import {HeroesModule} from 'app/heroes/heroes.module';
     MessagesComponent,
     DashboardComponent,
     HeroSearchComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    ComposeMessageComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HeroesModule,
+    CrisisCenterModule,
     AppRoutingModule,
     HttpClientModule
   ],
