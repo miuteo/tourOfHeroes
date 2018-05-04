@@ -16,7 +16,8 @@ import 'rxjs/add/operator/switchMap';
     </ul>
 
     <router-outlet></router-outlet>
-  `
+  `,
+  styleUrls: ['../app.component.css']
 })
 export class CrisisListComponent implements OnInit{
   selectedId: number;

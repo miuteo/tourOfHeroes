@@ -18,6 +18,10 @@ import {HeroesModule} from 'app/heroes/heroes.module';
 import {CrisisCenterModule} from './crisis-center/crisis-center.module';
 import {ComposeMessageComponent} from './compose-mesage.component';
 import {NavbarComponent} from './layouts/navbar/navbar.component';
+import {AdminModule} from './admin/admin.module';
+import {AuthService} from './auth.service';
+import {LoginRoutingModule} from './login-routing.module';
+import {LoginComponent} from './login.component';
 
 
 @NgModule({
@@ -30,17 +34,20 @@ import {NavbarComponent} from './layouts/navbar/navbar.component';
     HeroSearchComponent,
     PageNotFoundComponent,
     ComposeMessageComponent,
-    NavbarComponent
+    NavbarComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HeroesModule,
     CrisisCenterModule,
+    AdminModule,
+    LoginRoutingModule,
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [HeroService,MessageService],
+  providers: [HeroService,MessageService,AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

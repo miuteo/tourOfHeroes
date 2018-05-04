@@ -7,6 +7,8 @@ import {CrisisListComponent} from './crisis-list.component';
 import {CommonModule} from '@angular/common';
 import {CrisisDetailComponent} from './crisis-detail.component';
 import {FormsModule} from '@angular/forms';
+import {DialogService} from '../dialog.service';
+import {CanDeactivateGuard} from '../can-deactivate-guard.service';
 
 @NgModule({
   imports: [CommonModule,CrisisCenterRoutingModule,FormsModule],
@@ -14,6 +16,6 @@ import {FormsModule} from '@angular/forms';
                 CrisisCenterHomeComponent,
                 CrisisListComponent,
                 CrisisDetailComponent],
-  providers: [CrisisService]
+  providers: [CrisisService,DialogService,CanDeactivateGuard]
 })
 export class CrisisCenterModule {}

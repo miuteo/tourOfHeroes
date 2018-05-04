@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Crisis, CrisisService} from './crisis.service';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
+import {Observable} from 'rxjs/Observable';
+import {DialogService} from '../dialog.service';
 
 @Component({
   template: `
@@ -24,7 +26,8 @@ export class CrisisDetailComponent implements OnInit{
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private service: CrisisService){
+              private service: CrisisService,
+              private dialogService: DialogService){
 
   }
   ngOnInit(){
@@ -67,6 +70,13 @@ export class CrisisDetailComponent implements OnInit{
 
   goToCrises(){
     this.router.navigate(['../',{id: this.crisis.id}],{relativeTo: this.route});
+  }
+
+  canDeactivate(): boolean | Observable<boolean>{
+    if(!this.editName || this.editName === this.crisis.name)
+      return true;
+
+    return this.dialogService.confirm('Discard changes?');
   }
 
 }
