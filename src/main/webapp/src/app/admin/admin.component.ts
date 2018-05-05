@@ -1,4 +1,6 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
+import {ActivatedRoute, ParamMap} from '@angular/router';
 
 @Component({
   template: `
@@ -14,5 +16,4 @@ import {Component} from '@angular/core';
   styleUrls: ['admin.component.css']
 })
 export class AdminComponent{
-
 }

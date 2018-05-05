@@ -1,5 +1,5 @@
 import {AuthService} from './auth.service';
-import {Router} from '@angular/router';
+import {NavigationExtras, Router} from '@angular/router';
 import {Component} from '@angular/core';
 
 @Component({
@@ -29,7 +29,11 @@ export class LoginComponent{
       this.setMessage();
       if(this.authService.isLoggedIn){
         let redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/crisis-center/';
-        this.router.navigate([redirect]);
+        let navigationExtras: NavigationExtras = {
+          queryParamsHandling: 'preserve',
+          preserveFragment: true
+        };
+        this.router.navigate([redirect],navigationExtras);
       }
     })
 

@@ -1,4 +1,4 @@
-import {CanActivate, CanActivateChild, Router} from '@angular/router';
+import {CanActivate, CanActivateChild, NavigationExtras, Router} from '@angular/router';
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router/src/router_state';
 import {Observable} from 'rxjs/Observable';
@@ -22,7 +22,6 @@ export class AuthGuard implements CanActivate,CanActivateChild{
       //     this.isLoggedIn = true;
       //
       //   })
-    console.log('canActivate')
     let url: string = state.url;
     return this.checkLogin(url);
   }
@@ -30,15 +29,21 @@ export class AuthGuard implements CanActivate,CanActivateChild{
     this.isLoggedIn = false;
   }
   canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot){
-    console.log('canActivateChild')
       return this.canActivate(childRoute, state);
   }
 
   checkLogin(url: string): boolean{
       if(this.authService.isLoggedIn){return true;}
 
+
       this.authService.redirectUrl = url;
-      this.router.navigate(['/login']);
+
+      let sessionID = 12345;
+      let navigationExtra: NavigationExtras = {
+        queryParams: {'session_id': sessionID},
+        fragment: 'anchor'
+      };
+      this.router.navigate(['/login'],navigationExtra);
       return false;
   }
 }
