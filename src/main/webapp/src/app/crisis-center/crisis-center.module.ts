@@ -9,6 +9,7 @@ import {CrisisDetailComponent} from './crisis-detail.component';
 import {FormsModule} from '@angular/forms';
 import {DialogService} from '../dialog.service';
 import {CanDeactivateGuard} from '../can-deactivate-guard.service';
+import {CrisisDetailResolver} from './crisis-detail-resolver.service';
 
 @NgModule({
   imports: [CommonModule,CrisisCenterRoutingModule,FormsModule],
@@ -16,6 +17,6 @@ import {CanDeactivateGuard} from '../can-deactivate-guard.service';
                 CrisisCenterHomeComponent,
                 CrisisListComponent,
                 CrisisDetailComponent],
-  providers: [CrisisService,DialogService,CanDeactivateGuard]
+  providers: [CrisisService,DialogService,CanDeactivateGuard,CrisisDetailResolver]
 })
 export class CrisisCenterModule {}

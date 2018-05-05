@@ -24,7 +24,10 @@ export class CrisisService{
   getCrises(){ return this.crises$; }
 
   getCrisis(id: number | string): Observable<Crisis>{
-    return this.getCrises().map(crises => crises.find(crisis => crisis.id === +id));
+    // console.log(`getCrisis:am fost apelat cu id=${id}`);
+    return this.getCrises()
+      // .delay(3000)
+      .map(crises => crises.find(crisis => crisis.id === +id));
   }
 
   addCrisis(name: string){
