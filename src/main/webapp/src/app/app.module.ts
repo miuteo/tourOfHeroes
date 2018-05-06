@@ -22,6 +22,7 @@ import {AdminModule} from './admin/admin.module';
 import {AuthService} from './auth.service';
 import {LoginRoutingModule} from './login-routing.module';
 import {LoginComponent} from './login.component';
+import {AuthGuard} from './auth-guard.service';
 
 
 @NgModule({
@@ -42,12 +43,12 @@ import {LoginComponent} from './login.component';
     FormsModule,
     HeroesModule,
     CrisisCenterModule,
-    AdminModule,
+    // AdminModule,
     LoginRoutingModule,
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [HeroService,MessageService,AuthService],
+  providers: [HeroService,MessageService,AuthService,AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

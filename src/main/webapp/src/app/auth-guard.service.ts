@@ -1,4 +1,4 @@
-import {CanActivate, CanActivateChild, NavigationExtras, Router} from '@angular/router';
+import {CanActivate, CanActivateChild, CanLoad, NavigationExtras, Router} from '@angular/router';
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router/src/router_state';
 import {Observable} from 'rxjs/Observable';
@@ -6,9 +6,10 @@ import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/delay';
 import 'rxjs/add/operator/do';
 import {AuthService} from './auth.service';
+import {Route} from '@angular/router/src/config';
 
 @Injectable()
-export class AuthGuard implements CanActivate,CanActivateChild{
+export class AuthGuard implements CanActivate,CanActivateChild,CanLoad{
   constructor(private authService: AuthService,private router: Router){
 
   }
@@ -45,5 +46,9 @@ export class AuthGuard implements CanActivate,CanActivateChild{
       };
       this.router.navigate(['/login'],navigationExtra);
       return false;
+  }
+  canLoad(route: Route){
+    let url = `/${route.path}`;
+    return this.checkLogin(url);
   }
 }

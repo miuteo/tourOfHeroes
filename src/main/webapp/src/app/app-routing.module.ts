@@ -6,6 +6,7 @@ import {HeroDetailComponent} from './hero-detail/hero-detail.component';
 import {PageNotFoundComponent} from './PageNotFoundComponent';
 import {ComposeMessageComponent} from './compose-mesage.component';
 import {NavbarComponent} from './layouts/navbar/navbar.component';
+import {AuthGuard} from './auth-guard.service';
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
@@ -16,6 +17,11 @@ const routes: Routes = [
     path: 'compose',
     component: ComposeMessageComponent,
     outlet: 'popupTeo'
+  },
+  {
+    path: 'admin',
+    loadChildren: 'app/admin/admin.module#AdminModule',
+    canLoad: [AuthGuard]
   },
   // {path: 'detail/:id', component: HeroDetailComponent},
   {path: '**', component: PageNotFoundComponent}
