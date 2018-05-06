@@ -23,6 +23,7 @@ import {AuthService} from './auth.service';
 import {LoginRoutingModule} from './login-routing.module';
 import {LoginComponent} from './login.component';
 import {AuthGuard} from './auth-guard.service';
+import {SelectivePreloadingStrategy} from 'app/selective-preloading-strategy';
 
 
 @NgModule({
@@ -42,13 +43,13 @@ import {AuthGuard} from './auth-guard.service';
     BrowserModule,
     FormsModule,
     HeroesModule,
-    CrisisCenterModule,
+    // CrisisCenterModule,
     // AdminModule,
     LoginRoutingModule,
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [HeroService,MessageService,AuthService,AuthGuard],
+  providers: [HeroService,MessageService,AuthService,AuthGuard,SelectivePreloadingStrategy],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
